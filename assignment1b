@@ -1,0 +1,62 @@
+/****************************************************************************
+ *
+ * Created by: Tristan
+ * Created on: Feburary 2018
+ * This returns a value for the maxrun in a string.
+ *
+ ****************************************************************************/
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+public class assignment1b
+{
+	
+	public static void main(String args[]) 
+	{
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Please enter a string. I will find the max run within it.");
+        
+		String userInputString = "";
+		try {
+			userInputString = br.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		int maxRun = 0;
+		int currentSize = 1;
+		char characterCompare = 'a';
+		char characterCompareTwo = 'a';
+		
+		for (int loopIndex = 0; loopIndex < userInputString.length() - 1; loopIndex++)
+		{
+			characterCompare = userInputString.charAt(loopIndex); 
+			characterCompareTwo = userInputString.charAt(loopIndex + 1);  
+			
+			if (characterCompareTwo == characterCompare)
+			{
+				currentSize ++;
+				System.out.println("Compared");
+			} 
+			else 
+			{	
+				currentSize = 1;
+				System.out.println("Not compared");
+			}
+			
+			if (maxRun < currentSize)
+			{
+				maxRun = currentSize;
+				System.out.println(maxRun);
+			}
+			
+		}
+		System.out.println("The max run value is:");
+		System.out.println(maxRun);
+	}
+}
