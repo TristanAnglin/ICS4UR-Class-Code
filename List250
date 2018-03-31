@@ -1,0 +1,71 @@
+/****************************************************************************
+ *
+ * Created by: Tristan
+ * Created on: March 2018
+ * This program creates a random list of 250 numbers and spits them back at the user.
+ * They can ask to find a certain number and it will return the position in the list
+ * it's in if avaliable. 
+ *
+ ****************************************************************************/
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+
+public class a3
+{
+	public static void main(String args[]) 
+	{
+		int[] listNumbers = new int[250];
+		for(int i = 0; i < listNumbers.length; i++)
+		{
+		    listNumbers[i] = (int) (Math.random() * 500);
+		}
+		System.out.println("Generated - " + Arrays.toString(listNumbers)); 
+		
+		for (int i = 0; i < listNumbers.length; i++) 
+		{
+	        for (int j = i + 1; j < listNumbers.length; j++) 
+	        {
+	            int tmp = 0;
+	            if (listNumbers[i] > listNumbers[j]) 
+	            {
+	                tmp = listNumbers[i];
+	                listNumbers[i] = listNumbers[j];
+	                listNumbers[j] = tmp;
+	            }
+	        }
+		}
+		System.out.println("Sorted - " + Arrays.toString(listNumbers)); 
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Please enter a number you wish to find.");
+        
+		String userInputString = "";
+		try 
+		{
+			userInputString = br.readLine();
+		} catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		int	noIntCounter = 0;
+		int numberToFind = Integer.parseInt(userInputString); 	
+		for(int i = 0; i < listNumbers.length; i++)
+		{
+			if(numberToFind == listNumbers[i])
+		    {
+				System.out.println("Your number is currently in slot " + (i+1));
+		    }
+			else
+			{
+				noIntCounter++;
+			}
+		if (noIntCounter == 250)
+		{	
+			System.out.println("Your number is not in the array");
+		}
+		}
+	}
