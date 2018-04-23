@@ -1,0 +1,38 @@
+/****************************************************************************
+ *
+ * Created by: Tristan
+ * Created on: March 2018
+ * This program returns the amount of energy (in Joules) released when an 
+ * object of a certain mass (in kg) is converted to energy
+ *
+ ****************************************************************************/
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Random;
+
+public class energyrelease
+{
+	
+	public static void main(String args[]) 
+	{
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Please enter the mass(kg) of the object");
+        
+        String userInput = ""; 
+		try {
+			userInput = br.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		double SPEED_OF_LIGHT = 2.998 * Math.pow(10,8);
+		int mass = Integer.parseInt(userInput); 
+		double energyReleased = SPEED_OF_LIGHT * Math.pow(mass,2);
+		
+		System.out.println("The energy released from an object of " + mass + "(kg) is " + energyReleased + "(J)");
+	}
+}
