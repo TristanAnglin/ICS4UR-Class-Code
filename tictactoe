@@ -1,0 +1,164 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class TicTacToe
+{
+	public int[][] grid = new int[3][3];
+	public static int[] available = {1,2,3,4,5,6,7,8,9};
+	public static boolean gameOver = false;
+	
+	public static void isGameWon() 
+	{
+		if (available[0] == -1 || available[0] == 0 && available[1] == -1
+			|| available[1] == 0 && available[2] == -1 || available[2] == 0
+			&& available[3] == -1 || available[3] == 0 && available[4] == -1 
+			|| available[4] == 0 && available[5] == -1 || available[5] == 0
+			&& available[6] == -1 || available[6] == 0 && available[7] == -1
+			|| available[7] == 0 && available[8] == -1 || available[8] == 0)
+		{
+			gameOver = true;
+			System.out.println("Game over, you tied!");
+		}
+		else if (available[0] == 0 && available[1] == 0 && available[2] == 0
+			|| available[0] == 0 && available[3] == 0 && available[6] == 0
+			|| available[0] == 0 && available[4] == 0 && available[8] == 0
+			|| available[3] == 0 && available[4] == 0 && available[5] == 0
+			|| available[6] == 0 && available[7] == 0 && available[8] == 0
+			|| available[2] == 0 && available[4] == 0 && available[6] == 0)
+		{
+			gameOver = true;
+			System.out.println("Game over, you win!");
+		}
+		else if (available[0] == -1 && available[1] == -1 && available[2] == -1
+			|| available[0] == -1 && available[3] == -1 && available[6] == -1
+			|| available[0] == -1 && available[4] == -1 && available[8] == -1
+			|| available[3] == -1 && available[4] == -1 && available[5] == -1
+			|| available[6] == -1 && available[7] == -1 && available[8] == -1
+			|| available[2] == -1 && available[4] == -1 && available[6] == -1)
+		{
+			gameOver = true;
+			System.out.println("Game over, you lose!");
+		}
+	}
+	
+	public static String displayGrid()
+	{
+		String disOne = Integer.toString(available[0]);
+		String disTwo = Integer.toString(available[1]);
+		String disThree = Integer.toString(available[2]);
+		String disFour = Integer.toString(available[3]);
+		String disFive = Integer.toString(available[4]);
+		String disSix = Integer.toString(available[5]);
+		String disSeven = Integer.toString(available[6]);
+		String disEight = Integer.toString(available[7]);
+		String disNine = Integer.toString(available[8]);
+		if (available[0] == 0){
+			disOne = "O";}
+		else if (available[0] == -1) {
+			disOne = "X";}
+		if (available[1] == 0){
+			disTwo = "O";}
+		else if (available[1] == -1) {
+			disTwo = "X";}
+		if (available[2] == 0){
+			disThree = "O";}
+		else if (available[2] == -1) {
+			disThree = "X";}
+		if (available[3] == 0){
+			disFour = "O";}
+		else if (available[3] == -1) {
+			disFour = "X";}
+		if (available[4] == 0){
+			disFive = "O";}
+		else if (available[4] == -1) {
+			disFive = "X";}
+		if (available[5] == 0){
+			disSix = "O";}
+		else if (available[5] == -1) {
+			disSix = "X";}
+		if (available[6] == 0){
+			disSeven = "O";}
+		else if (available[6] == -1) {
+			disSeven = "X";}
+		if (available[7] == 0){
+			disEight = "O";}
+		else if (available[7] == -1) {
+			disEight = "X";}
+		if (available[8] == 0){
+			disNine = "O";}
+		else if (available[8] == -1) {
+			disNine = "X";}
+		
+		isGameWon();
+		
+		return ("    " + disOne + " | " + disTwo + " | " + disThree + " \n"
+			  + "   ---|---|---\n"
+			  + "    " + disFour + " | " + disFive + " | " + disSix + " \n"
+			  + "   ---|---|---\n"								
+			  + "    " + disSeven + " | " + disEight + " | " + disNine + " \n");
+	}
+	
+	public static void computerPick()
+	{
+		int randomPick = (int) (Math.random() * 8 + 1);	
+		while (available[randomPick] == 0 || available[randomPick] == -1) 
+		{
+			randomPick = (int) (Math.random() * 8 + 1);
+		}
+		available[randomPick] = -1;
+	}
+	
+	public static void invalidInput(String userInput) 
+	{
+		int counter = 0;
+		for (int index = 0; index <= 8; index++)
+		{ 
+			if (Integer.parseInt(userInput) == available[index])
+			{
+				available[index] = 0;
+				counter--;
+				System.out.println(displayGrid());
+				if (gameOver == false)
+				{
+					computerPick();
+					System.out.println(displayGrid());
+				}
+			}
+			counter++;
+			if (counter == 9)
+			{
+				System.out.println("Please enter proper input");
+			}
+		}
+	}
+	
+	public static void main(String[] args) 
+	{
+		InputStreamReader r = new InputStreamReader(System.in);
+	    BufferedReader br = new BufferedReader(r);
+		System.out.println("The computer will be X's");
+		System.out.println("Please enter the number location you would like to place an O\n"
+							+ "    1 | 2 | 3 \n"
+							+ "   ---|---|---\n"
+							+ "    4 | 5 | 6 \n"
+							+ "   ---|---|---\n"
+							+ "    7 | 8 | 9 \n");
+		while (gameOver == false)
+		{
+			String userInputString = "";
+		    try 
+			{
+				userInputString = br.readLine();
+			} 
+			catch (IOException e) 
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		    invalidInput(userInputString);
+		}
+		
+	  
+	}
+}
