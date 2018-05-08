@@ -10,17 +10,7 @@ public class TicTacToe
 	
 	public static void isGameWon() 
 	{
-		if (available[0] == -1 || available[0] == 0 && available[1] == -1
-			|| available[1] == 0 && available[2] == -1 || available[2] == 0
-			&& available[3] == -1 || available[3] == 0 && available[4] == -1 
-			|| available[4] == 0 && available[5] == -1 || available[5] == 0
-			&& available[6] == -1 || available[6] == 0 && available[7] == -1
-			|| available[7] == 0 && available[8] == -1 || available[8] == 0)
-		{
-			gameOver = true;
-			System.out.println("Game over, you tied!");
-		}
-		else if (available[0] == 0 && available[1] == 0 && available[2] == 0
+		if (available[0] == 0 && available[1] == 0 && available[2] == 0
 			|| available[0] == 0 && available[3] == 0 && available[6] == 0
 			|| available[0] == 0 && available[4] == 0 && available[8] == 0
 			|| available[3] == 0 && available[4] == 0 && available[5] == 0
@@ -39,6 +29,16 @@ public class TicTacToe
 		{
 			gameOver = true;
 			System.out.println("Game over, you lose!");
+		}
+		else if (available[0] == -1 || available[0] == 0 && available[1] == -1
+				|| available[1] == 0 && available[2] == -1 || available[2] == 0
+				&& available[3] == -1 || available[3] == 0 && available[4] == -1 
+				|| available[4] == 0 && available[5] == -1 || available[5] == 0
+				&& available[6] == -1 || available[6] == 0 && available[7] == -1
+				|| available[7] == 0 && available[8] == -1 || available[8] == 0)
+		{
+			gameOver = true;
+			System.out.println("Game over, you tied!");
 		}
 	}
 	
