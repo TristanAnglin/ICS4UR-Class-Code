@@ -7,43 +7,35 @@ public class TicTacToe
 	public int[][] grid = new int[3][3];
 	public static int[] available = {1,2,3,4,5,6,7,8,9};
 	public static boolean gameOver = false;
+	public static int whoStarts = (int) (Math.random() * 2);
+	public static int turnCounter = 1;
 	
-	public static void isGameWon() 
-	{
+	public static void isGameWon(){
 		if (available[0] == 0 && available[1] == 0 && available[2] == 0
 			|| available[0] == 0 && available[3] == 0 && available[6] == 0
 			|| available[0] == 0 && available[4] == 0 && available[8] == 0
 			|| available[3] == 0 && available[4] == 0 && available[5] == 0
 			|| available[6] == 0 && available[7] == 0 && available[8] == 0
-			|| available[2] == 0 && available[4] == 0 && available[6] == 0)
-		{
+			|| available[2] == 0 && available[4] == 0 && available[6] == 0){
 			gameOver = true;
-			System.out.println("Game over, you win!");
-		}
+			System.out.println("Game over, you win!");}
 		else if (available[0] == -1 && available[1] == -1 && available[2] == -1
-			|| available[0] == -1 && available[3] == -1 && available[6] == -1
-			|| available[0] == -1 && available[4] == -1 && available[8] == -1
-			|| available[3] == -1 && available[4] == -1 && available[5] == -1
-			|| available[6] == -1 && available[7] == -1 && available[8] == -1
-			|| available[2] == -1 && available[4] == -1 && available[6] == -1)
-		{
+				|| available[0] == -1 && available[3] == -1 && available[6] == -1
+				|| available[0] == -1 && available[4] == -1 && available[8] == -1
+				|| available[3] == -1 && available[4] == -1 && available[5] == -1
+				|| available[6] == -1 && available[7] == -1 && available[8] == -1
+				|| available[2] == -1 && available[4] == -1 && available[6] == -1){	
 			gameOver = true;
-			System.out.println("Game over, you lose!");
-		}
-		else if (available[0] == -1 || available[0] == 0 && available[1] == -1
-				|| available[1] == 0 && available[2] == -1 || available[2] == 0
-				&& available[3] == -1 || available[3] == 0 && available[4] == -1 
-				|| available[4] == 0 && available[5] == -1 || available[5] == 0
-				&& available[6] == -1 || available[6] == 0 && available[7] == -1
-				|| available[7] == 0 && available[8] == -1 || available[8] == 0)
-		{
+			System.out.println("Game over, you lose!");}
+		else if ((available[0] == -1 || available[0] == 0) && (available[1] == -1
+				|| available[1] == 0) && (available[2] == -1 || available[2] == 0)
+				&& (available[3] == -1 || available[3] == 0) && (available[4] == -1 
+				|| available[4] == 0) && (available[5] == -1 || available[5] == 0)
+				&& (available[6] == -1 || available[6] == 0) && (available[7] == -1
+				|| available[7] == 0) && (available[8] == -1 || available[8] == 0)){
 			gameOver = true;
-			System.out.println("Game over, you tied!");
-		}
-	}
-	
-	public static String displayGrid()
-	{
+			System.out.println("Game over, you tied!");}}
+	public static String displayGrid(){
 		String disOne = Integer.toString(available[0]);
 		String disTwo = Integer.toString(available[1]);
 		String disThree = Integer.toString(available[2]);
@@ -89,76 +81,299 @@ public class TicTacToe
 			disNine = "O";}
 		else if (available[8] == -1) {
 			disNine = "X";}
-		
 		isGameWon();
-		
 		return ("    " + disOne + " | " + disTwo + " | " + disThree + " \n"
 			  + "   ---|---|---\n"
 			  + "    " + disFour + " | " + disFive + " | " + disSix + " \n"
 			  + "   ---|---|---\n"								
-			  + "    " + disSeven + " | " + disEight + " | " + disNine + " \n");
-	}
-	
-	public static void computerPick()
-	{
-		int randomPick = (int) (Math.random() * 8 + 1);	
-		while (available[randomPick] == 0 || available[randomPick] == -1) 
-		{
-			randomPick = (int) (Math.random() * 8 + 1);
-		}
-		available[randomPick] = -1;
-	}
-	
-	public static void invalidInput(String userInput) 
-	{
+			  + "    " + disSeven + " | " + disEight + " | " + disNine + " \n");}
+	public static void computerPick(){
+		turnCounter = 1;
+		for (int index = 0; index <= 8; index++){
+			if (available[index] == 0 || available[index] == -1){
+				turnCounter++;}}
+		if (whoStarts == 0){
+			if (turnCounter == 2){
+				if (available[4] != 0){
+					available[4] = -1;}
+				else{
+					int pickCorner = (int) (Math.random() * 4 + 1);
+					if (pickCorner == 1){
+						available[0] = -1;}
+					else if (pickCorner == 2){
+						available[2] = -1;}
+					else if (pickCorner == 3){
+						available[6] = -1;}
+					else if (pickCorner == 4){
+						available[8] = -1;}}}
+			else{
+				if (available[0] == -1 && available[2] == -1 && available[1] != 0){
+					available[1] = -1;}
+				else if (available[0] == -1 && available[6] == -1 && available[3] != 0){
+					available[3] = -1;}
+				else if (available[6] == -1 && available[8] == -1 && available[7] != 0){
+					available[7] = -1;}
+				else if (available[2] == -1 && available[8] == -1 && available[5] != 0){
+					available[5] = -1;}
+				else if (((available[2] == -1 && available[6] == -1) || (available[0] == -1 && available[8] == -1)) && available[4] != 0){
+					available[4] = -1;}
+				else if (available[0] == 0 && available[2] == 0 && available[1] != -1){
+					available[1] = -1;}
+				else if (available[0] == 0 && available[6] == 0 && available[3] != -1){
+					available[3] = -1;}
+				else if (available[6] == 0 && available[8] == 0 && available[7] != -1){
+					available[7] = -1;}
+				else if (available[2] == 0 && available[8] == 0 && available[5] != -1){
+					available[5] = -1;}
+				else if (((available[2] == 0 && available[6] == 0) || (available[0] == 0 && available[8] == 0)) && available[4] != -1){
+					available[4] = -1;}
+				else if (available[0] == 0 && available[1] == 0 && available[2] != -1){
+					available[2] = -1;}
+				else if (available[1] == 0 && available[2] == 0 && available[0] != -1){
+					available[0] = -1;}
+				else if (available[0] == 0 && available[3] == 0 && available[6] != -1){
+					available[6] = -1;}
+				else if (available[1] == 0 && available[4] == 0 && available[7] != -1){
+					available[7] = -1;}
+				else if (available[2] == 0 && available[5] == 0 && available[8] != -1){
+					available[8] = -1;}
+				else if (available[3] == 0 && available[4] == 0 && available[5] != -1){
+					available[5] = -1;}
+				else if (available[4] == 0 && available[5] == 0 && available[3] != -1){
+					available[3] = -1;}
+				else if (available[8] == 0 && available[5] == 0 && available[2] != -1){
+					available[2] = -1;}
+				else if (available[7] == 0 && available[4] == 0 && available[1] != -1){
+					available[1] = -1;}
+				else if (available[6] == 0 && available[3] == 0 && available[0] != -1){
+					available[0] = -1;}
+				else if (available[6] == 0 && available[7] == 0 && available[8] != -1){
+					available[8] = -1;}
+				else if (available[7] == 0 && available[8] == 0 && available[6] != -1){
+					available[6] = -1;}
+				else if (available[0] == 0 && available[4] == 0 && available[8] != -1){
+					available[8] = -1;}
+				else if (available[4] == 0 && available[8] == 0 && available[0] != -1){
+					available[0] = -1;}
+				else if (available[2] == 0 && available[4] == 0 && available[6] != -1){
+					available[6] = -1;}
+				else if (available[6] == 0 && available[4] == 0 && available[2] != -1){
+					available[2] = -1;}
+				else if ((available[0] == 0 && available[8] == 0) || (available[2] == 0 && available[6] == 0) && (available[1] != -1)){
+					available[1] = -1;}
+				else if ((available[0] == 0 && available[8] == 0) || (available[2] == 0 && available[6] == 0) && (available[7] != -1)){
+					available[7] = -1;}
+				else{
+					int randomPick = 1;
+					for (int index = 0; index <= 8; index++){
+						if (available[index] == randomPick){
+							available[index] = -1;}
+						else{
+							randomPick++;}}}}}
+		if (whoStarts == 1){
+			if (turnCounter == 1){
+				int pickCorner = (int) (Math.random() * 4 + 1);
+				if (pickCorner == 1){
+					available[0] = -1;}
+				else if (pickCorner == 2){
+					available[2] = -1;}
+				else if (pickCorner == 3){
+					available[6] = -1;}
+				else if (pickCorner == 4){
+					available[8] = -1;}}
+			else if (turnCounter == 3){
+				if (available[4] == 0){
+					if (available[0] == -1){
+						available[8] = -1;}
+					else if (available[2] == -1){
+						available[6] = -1;}
+					else if (available[6] == -1){
+						available[2] = -1;}
+					else if (available[8] == -1){
+						available[0] = -1;}}
+				else{
+					if (available[0] == -1){
+						if (available[1] == 0 || available[2] == 0){
+							available[6] = -1;}
+						else{
+							available[2] = -1;}}
+					else if (available[2] == -1){
+						if (available[0] == 0 || available[1] == 0){
+							available[8] = -1;}
+						else{
+							available[0] = -1;}}
+					else if (available[6] == -1){
+						if (available[7] == 0 || available[8] == 0){
+							available[0] = -1;}
+						else{
+							available[8] = -1;}}
+					else if (available[8] == -1){
+						if (available[2] == 0 || available[5] == 0){
+							available[6] = -1;}
+						else{
+							available[2] = -1;}}}}
+			else if (turnCounter == 5){
+				if (available[4] == 0){
+					if (available[0] == -1 && available[2] == -1){
+						available[1] = -1;}
+					else if (available[0] == -1 && available[6] == -1){
+						available[3] = -1;}
+					else if (available[2] == -1 && available[8] == -1){
+						available[5] = -1;}
+					else if (available[6] == -1 && available[8] == -1){
+						available[7] = -1;}
+					else if (available[0] == -1 && available[8] == -1){
+						if (available[1] == 0){
+							available[7] = -1;}
+						if (available[2] == 0){
+							available[6] = -1;}
+						if (available[5] == 0){
+							available[3] = -1;}
+						if (available[3] == 0){
+							available[5] = -1;}
+						if (available[6] == 0){
+							available[2] = -1;}
+						if (available[7] == 0){
+							available[1] = -1;}}
+					else if (available[2] == -1 && available[6] == -1){
+						if (available[0] == 0){
+							available[8] = -1;}
+						if (available[1] == 0){
+							available[7] = -1;}
+						if (available[3] == 0){
+							available[5] = -1;}
+						if (available[5] == 0){
+							available[3] = -1;}
+						if (available[8] == 0){
+							available[0] = -1;}
+						if (available[7] == 0){
+							available[1] = -1;}}}
+				else{
+					if (available[0] == -1 && available[2] == -1 && available[1] != 0){
+						available[1] = -1;}
+					else if (available[0] == -1 && available[6] == -1 && available[3] != 0){
+						available[3] = -1;}
+					else if (available[6] == -1 && available[8] == -1 && available[7] != 0){
+						available[7] = -1;}
+					else if (available[2] == -1 && available[8] == -1 && available[5] != 0){
+						available[5] = -1;}
+					else{
+						if (available[2] == -1 && available[8] == -1 && available[3] == 0){
+							available[4] = -1;}
+						else if (available[2] == -1 && available[8] == -1 && (available[0] == 0 || available[1] == 0)){
+							available[6] = -1;}
+						else if (available[2] == -1 && available[8] == -1 && (available[6] == 0 || available[7] == 0)){
+							available[0] = -1;}
+						else if (available[0] == -1 && available[2] == -1 && available[7] == 0){
+							available[4] = -1;}
+						else if (available[0] == -1 && available[2] == -1 && (available[3] == 0 || available[6] == 0)){
+							available[8] = -1;}
+						else if (available[0] == -1 && available[2] == -1 && (available[5] == 0 || available[8] == 0)){
+							available[6] = -1;}
+						else if (available[0] == -1 && available[6] == -1 && available[5] == 0){
+							available[4] = -1;}
+						else if (available[0] == -1 && available[6] == -1 && (available[1] == 0 || available[2] == 0)){
+							available[8] = -1;}
+						else if (available[0] == -1 && available[6] == -1 && (available[7] == 0 || available[8] == 0)){
+							available[2] = -1;}
+						else if (available[6] == -1 && available[8] == -1 && available[1] == 0){
+							available[4] = -1;}
+						else if (available[6] == -1 && available[8] == -1 && (available[0] == 0 || available[3] == 0)){
+							available[2] = -1;}
+						else if (available[6] == -1 && available[8] == -1 && (available[2] == 0 || available[5] == 0)){
+							available[0] = -1;}}}}
+			else if (turnCounter == 7){
+				if (available[4] == 0){
+					if (available[0] == -1 && available[2] == -1 && available[1] != 0){
+						available[1] = -1;}
+					else if (available[0] == -1 && available[6] == -1 && available[3] != 0){
+						available[3] = -1;}
+					else if (available[6] == -1 && available[8] == -1 && available[7] != 0){
+						available[7] = -1;}
+					else if (available[2] == -1 && available[8] == -1 && available[5] != 0){
+						available[5] = -1;}
+					else{
+						if (available[0] == 0 && available[8] != -1){
+							available[8] = -1;}
+						else if (available[1] == 0 && available[7] != -1){
+							available[7] = -1;}
+						else if (available[2] == 0 && available[6] != -1){
+							available[6] = -1;}
+						else if (available[5] == 0 && available[3] != -1){
+							available[3] = -1;}
+						else if (available[8] == 0 && available[0] != -1){
+							available[0] = -1;}
+						else if (available[7] == 0 && available[1] != -1){
+							available[1] = -1;}
+						else if (available[6] == 0 && available[2] != -1){
+							available[2] = -1;}
+						else if (available[3] == 0 && available[5] != -1){
+							available[5] = -1;}}}
+				else{
+					if (available[0] == -1 && available[2] == -1 && available[1] != 0){
+						available[1] = -1;}
+					else if (available[0] == -1 && available[6] == -1 && available[3] != 0){
+						available[3] = -1;}
+					else if (available[6] == -1 && available[8] == -1 && available[7] != 0){
+						available[7] = -1;}
+					else if (available[2] == -1 && available[8] == -1 && available[5] != 0){
+						available[5] = -1;}
+					else if (((available[2] == -1 && available[6] == -1) || (available[0] == -1 && available[8] == -1)) && (available[4] != 0 || available[4] != -1)){
+						available[4] = -1;}}}
+			else if (turnCounter == 9){
+				int boardCounter = 1;
+				for (int index = 0; index <= 8; index++){
+					if (available[index] == boardCounter){
+						available[index] = -1;}
+					boardCounter++;}}}}
+	public static void invalidInput(String userInput) {
 		int counter = 0;
-		for (int index = 0; index <= 8; index++)
-		{ 
-			if (Integer.parseInt(userInput) == available[index])
-			{
+		for (int index = 0; index <= 8; index++){ 
+			if (Integer.parseInt(userInput) == available[index]){
 				available[index] = 0;
 				counter--;
 				System.out.println(displayGrid());
-				if (gameOver == false)
-				{
+				if (gameOver == false){
+					System.out.println("Computer goes");
 					computerPick();
-					System.out.println(displayGrid());
-				}
-			}
+					System.out.println(displayGrid());}}
 			counter++;
-			if (counter == 9)
-			{
-				System.out.println("Please enter proper input");
-			}
-		}
-	}
+			if (counter == 9){
+				System.out.println("Please enter proper input");}}}
 	
-	public static void main(String[] args) 
-	{
+	public static void main(String[] args) {
 		InputStreamReader r = new InputStreamReader(System.in);
 	    BufferedReader br = new BufferedReader(r);
-		System.out.println("The computer will be X's");
-		System.out.println("Please enter the number location you would like to place an O\n"
-							+ "    1 | 2 | 3 \n"
-							+ "   ---|---|---\n"
-							+ "    4 | 5 | 6 \n"
-							+ "   ---|---|---\n"
-							+ "    7 | 8 | 9 \n");
-		while (gameOver == false)
-		{
-			String userInputString = "";
-		    try 
-			{
-				userInputString = br.readLine();
-			} 
-			catch (IOException e) 
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    invalidInput(userInputString);
-		}
-		
-	  
-	}
-}
+		if (whoStarts == 0){
+			System.out.println("The computer will be X's\n"
+								+ "You go first.");
+			System.out.println("Please enter the number location you would like to place an O\n"
+		        	+ "    1 | 2 | 3 \n"
+		        	+ "   ---|---|---\n"
+		        	+ "    4 | 5 | 6 \n"
+		        	+ "   ---|---|---\n"
+		        	+ "    7 | 8 | 9 \n");
+			
+			while (gameOver == false){
+				String userInputString = "";
+			    try {
+					userInputString = br.readLine();} 
+				catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();}
+			    invalidInput(userInputString);}}
+		else if (whoStarts == 1){
+			System.out.println("The computer will be X's\n"
+								+ "The computer goes first.");
+			computerPick();
+			System.out.print(displayGrid());
+			System.out.println("Please enter the number location you would like to place an O");
+			
+			while (gameOver == false){
+				String userInputString = "";
+			    try {
+					userInputString = br.readLine();} 
+				catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();}
+			    invalidInput(userInputString);}}}}
