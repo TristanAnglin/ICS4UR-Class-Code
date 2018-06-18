@@ -1,0 +1,68 @@
+/****************************************************************************
+ *
+ * Created by: Tristan
+ * Created on: March 2018
+ * Vehicle class 
+ *
+ ****************************************************************************/
+
+public class Vehicle 
+{
+    protected double brake;
+    protected double accelerate;
+	
+	public String colour;
+	public double speed;
+	public double maxSpeed;
+    
+    public Vehicle(String color, double sped, double maxsped)
+    {
+        colour = color;
+        speed = sped;
+        maxSpeed = maxsped;
+    }
+    
+    public Vehicle(double sped, double maxsped)
+    {
+        colour = "BLACK";
+        speed = sped;
+        maxSpeed = maxsped;
+    }
+    
+    public double braking(int brak, int vehiclenum)
+    {
+    	speed -= brak;
+    	System.out.print("[Vehicle " + vehiclenum + " Braking] -" + brak + "km/h\n");
+    	return speed;
+    }
+    
+    public double accelerating(int accel, int vehiclenum)
+    {
+    	speed += accel;
+    	System.out.print("[Vehicle " + vehiclenum + " Accelerating] +" + accel + "km/h\n");
+    	return speed;
+    }
+    
+    public String getVehicleColour()
+    {
+        return colour;
+    }
+    
+    public double getVehicleMaxSpeed()
+    {
+        return maxSpeed;
+    }
+    
+    public double getVehicleSpeed()
+    {
+        return speed;
+    }
+    
+    public String toString()
+    {
+        String result;
+        
+        result = "\nColour - " + getVehicleColour() + "\nMax Speed - " + getVehicleMaxSpeed() + "km/h\nCurrent Speed - " + getVehicleSpeed();
+        return result;
+    }
+}
