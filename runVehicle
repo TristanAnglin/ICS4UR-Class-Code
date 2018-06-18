@@ -1,0 +1,37 @@
+public class runVehicle {
+ 
+    public static void main(String[] arg)
+    {
+        Vehicle[]vehcl = new Vehicle [4];
+        truck  veh1 = new truck("ETY5-ASU", "Pink", (int) ((Math.random()*100)*100)/100, 150, 2, 4);
+        bike  veh2 = new bike("Red", (int) ((Math.random()*35)*100)/100, 35, 5);
+        truck  veh3 = new truck("Ford", "GTUA-809", "Yellow", (int) ((Math.random()*100)*100)/100, 150, 2, 4);
+        bike  veh4 = new bike("BMX", "Green", (int) ((Math.random()*35)*100)/100, 35, 5);
+        
+        vehcl[0] = veh1;
+        vehcl[1] = veh2;
+        vehcl[2] = veh3;
+        vehcl[3] = veh4;
+        
+        for( Vehicle veh : vehcl)
+        {
+            System.out.println();
+            System.out.println(veh);
+        }
+        
+        
+        
+    }
+ 
+}
+
+
+
+
+
+
+
+
+
+
+
