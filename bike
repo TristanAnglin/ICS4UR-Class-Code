@@ -1,0 +1,42 @@
+public class bike extends Vehicle
+{
+    double numWheels = 2;
+    double maxGear = 0;
+    double curGear = 0;
+    double speedpergear = 0;
+    String Model = "Unknown";
+	
+	public bike(String color, double sped, double maxsped, double maxgear)
+    {
+        super(color, sped, maxsped);
+        maxGear = maxgear;
+        speedpergear = (double) (maxsped / maxgear);
+    }
+	
+	public bike(String model, String color, double sped, double maxsped, double maxgear)
+    {
+        super(color, sped, maxsped);
+        maxGear = maxgear;
+        speedpergear = (double) (maxsped / maxgear);
+        Model = model;
+    }
+	
+	public double getCurrentGear()
+    {
+        curGear = (int) (speed / speedpergear +0.99);
+		return curGear;
+    }
+	
+	public double getMaxGear()
+    {
+        return maxGear;
+    }
+	
+    public String toString()
+    {
+        String result;
+        
+        result = "~ Bike ~\nModel - " + Model + "\nColour - " + getVehicleColour() + "\nMax Speed - " + getVehicleMaxSpeed() + "km/h\nCurrent Speed - " + getVehicleSpeed() + "km/h\nCurrent Gear - " + getCurrentGear() + "\nMax Gear - " + maxGear + "\n# of Wheels - " + numWheels + "\n";
+        return result;
+    }
+}
