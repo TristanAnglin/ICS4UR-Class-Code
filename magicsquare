@@ -1,0 +1,50 @@
+public class MagicSquare
+{
+	public static int[] genSquare = new int[9];
+	public static int[] available = {1,2,3,4,5,6,7,8,9};
+	
+	public static void genNumbers()
+	{
+		genSquare[0] = (int) (Math.random() * 8 + 1);
+		for (int index = 1; index <= 8; index++)
+		{
+			genSquare[index] = available[(int) (Math.random() * 8 + 1)];
+			if (genSquare[index] != 0)
+			{
+				available[index] = 0;
+				System.out.print(available[0] + available[1] + available[2] + available[3] + available[4] + available[5] + available[6] + available[7] + available[8] + "setting 0");
+			}
+			while (genSquare[index] == 0)
+			{
+				genSquare[index] = available[(int) (Math.random() * 8 + 1)];
+			}
+			System.out.print(available[0] + available[1] + available[2] + available[3] + available[4] + available[5] + available[6] + available[7] + available[8] + "finish");
+		}
+	}
+	
+	public static void checkSquare(int[] array)
+	{
+		if (array.length == 9)
+		{
+			//if (array[0])
+			//{
+			//	
+			//}
+		}
+		checkNumbers();
+	}
+	
+	public static void checkNumbers()
+	{
+		genNumbers();
+		System.out.println(genSquare[0] + genSquare[1] + genSquare[2] + "\n" +
+							genSquare[3] + genSquare[4] + genSquare[5] + "\n" +
+							genSquare[6] + genSquare[7] + genSquare[8] + "\n");
+	}
+	
+	public static void main(String[] args) 
+    {
+		System.out.print("These are all the possible magic square\n");
+		checkSquare(new int[] {1,2,3,4,5,6,7,8,9});
+    }
+}
