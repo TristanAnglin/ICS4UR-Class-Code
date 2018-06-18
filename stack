@@ -1,0 +1,45 @@
+/****************************************************************************
+ *
+ * Created by: Tristan
+ * Created on: March 2017  
+ *
+ ****************************************************************************/
+
+import java.util.List;
+import java.util.ArrayList;
+public class unit202
+{
+	public List<Integer> myStack;
+
+    public unit202(int SIZE) 
+    {
+        myStack = new ArrayList<Integer>(SIZE);
+    }
+
+    public void push(int i) 
+    {
+
+    	myStack.add(0,i);
+     }
+
+     public int pop() 
+     { 
+        if(!myStack.isEmpty()){
+           int i= myStack.get(0);
+           myStack.remove(0);
+           return i;
+        } else{
+           return -1;// Or any invalid value
+        }
+     }
+
+     public int peek()
+     {
+        if(!myStack.isEmpty()){
+           return myStack.get(0);
+        } else{
+           return -1;// Or any invalid value
+        }
+     }
+}
+	
