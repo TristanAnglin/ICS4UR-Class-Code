@@ -1,0 +1,52 @@
+public class truck extends Vehicle
+{
+    String licensePlate = "";
+    String Model = "Unknown";
+    double numWheels = 4;
+    double numDoors = 4;
+	
+	public truck(String licenseplate, String color, double sped, double maxsped, double door, double wheel)
+    {
+        super(color, sped, maxsped);
+        licensePlate = licenseplate;
+        numDoors = door;
+        numWheels = wheel;
+    }
+	
+	public truck(String model, String licenseplate, String color, double sped, double maxsped, double door, double wheel)
+    {
+        super(color, sped, maxsped);
+        licensePlate = licenseplate;
+        numDoors = door;
+        numWheels = wheel;
+        Model = model;
+    }
+    
+    public String getLicensePlate()
+    {
+        return licensePlate;
+    }
+    
+    public double getWheels()
+    {
+        return numWheels;
+    }
+    
+    public String toString()
+    {
+        String result;
+        
+        result = "~ Truck ~\nModel - " + Model + "\nLicense - "+ licensePlate + "\nColour - " + getVehicleColour() + "\nMax Speed - " + getVehicleMaxSpeed() + "km/h\nCurrent Speed - " + getVehicleSpeed() + "km/h\n# of Doors - " + numDoors + "\n# of Wheels - " + numWheels + "\n";
+        return result;
+    }
+}
+
+
+
+
+
+
+
+
+
+
