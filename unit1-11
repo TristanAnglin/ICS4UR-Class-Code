@@ -1,0 +1,132 @@
+/****************************************************************************
+ *
+ * Created by: Tristan
+ * Created on: March 2018
+ * This program is creating an ADT with an ENUM for student info.  
+ *
+ ****************************************************************************/
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+enum GRADES {
+	
+	GRADUATED("13"),
+	TWELVE("12"),
+	ELEVEN("11"),
+	TEN("10"),
+	NINE("9"),
+	EIGHT("8"),
+	SEVEN("7"),
+	SIX("6"),
+	FIVE("5"),
+	FOUR("4"),
+	THREE("3"),
+	TWO("2"),
+	ONE("1"),
+	SK("Senior Kindergarten"),
+	JK("Junior Kindergarten");
+	
+	private final String grade;
+
+    GRADES(String grade) {
+        this.grade = grade;
+    }
+    
+    public String getGrade() {
+        return this.grade;
+    }
+    
+	
+}
+
+class Student {
+		
+	public String _firstName;
+	public String _lastName;
+	public String _middleName;
+	public String _dateOfBirth; //dd/mm/yyyy
+	public GRADES _grade;
+	public boolean _present;
+	
+	//constructor
+	public Student (String firstName, 
+			        String lastName, 
+			        String middleName, 
+			        String dateOfBirth, 
+			        GRADES grade, 
+			        boolean present) {
+		
+		this._firstName = firstName;
+		this._lastName = lastName;
+		this._middleName = middleName;
+		this._dateOfBirth = dateOfBirth;
+		this._grade = grade;
+		this._present = present;
+	}
+}
+
+
+public class studentadt {
+	
+	public static void main(String[] args) throws IOException {
+		// get student info 
+		
+	    boolean moreStudents = true;
+		
+		String firstName;
+		String lastName;
+		String middleName;
+		String dateOfBirth;
+		GRADES gradeLevel; 
+		String gradeString;
+		String[] fiveStudents = {"1", "2", "3", "4", "5"};
+		boolean present = false;
+		
+		for (int counter = 0; moreStudents == true; counter++) {
+		
+		    InputStreamReader r = new InputStreamReader(System.in);
+		    BufferedReader br = new BufferedReader(r);
+		    
+		    System.out.println("Enter a first name for student " + (counter + 1) + ".");
+		    firstName = br.readLine();
+		    
+		    System.out.println("Enter a middle name for student " + (counter + 1) + ".");
+		    middleName = br.readLine();
+		    
+		    System.out.println("Enter a last name for student " + (counter + 1) + ".");
+		    lastName = br.readLine();
+		    
+		    System.out.println("Enter a date of birth (DD/MM/YYYY) for student # " + (counter + 1) + ".");
+		    dateOfBirth = br.readLine();		    
+		    
+		    System.out.println("Enter a grade (as plain text: JK-TWELVE) for student # " + (counter + 1) + ".");
+		    gradeString = br.readLine();
+		    gradeLevel = GRADES.valueOf(gradeString.toUpperCase());
+		    
+		    
+		    System.out.println("Is student " + (counter + 1) + " present? Y/N");
+		    
+		    if (br.readLine().equals("Y")) {
+		    	present = true;
+		    }
+		    
+		    String currentStudent = ("Name: " + firstName + " " + middleName + ". " + lastName + " | Birth: " + dateOfBirth + " | Grade: " + gradeLevel + " | Present: " + present);
+		    fiveStudents[counter] = currentStudent;
+		    System.out.println(fiveStudents[counter]);
+		    
+ 
+		    
+		    if (counter == 4)
+		    {
+		    	moreStudents = false;
+		    	System.out.println();
+		    	for (int counterStudents = 0; counterStudents <= 4; counterStudents++)
+		    		System.out.println("Student " + (counterStudents + 1) + " - | " + fiveStudents[counterStudents]);
+		    	
+		    }
+		}
+	}
+	
+}
